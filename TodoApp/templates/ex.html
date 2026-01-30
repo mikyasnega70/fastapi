@@ -1,0 +1,51 @@
+{% for todo in todos %}
+{% if todo.complete == False %}
+<tr>
+        <td>{{loop.index}}</td>
+        <td>{{todo.title}}</td>
+        <td>
+            <button onclick="window.location.href='edit-todo-page/{{todo.id}}'" type="button">edit</button>
+        </td>
+        </tr>
+        <tr>
+            {% else %}
+            <td>{{loop.index}}</td>
+            <td class="todo-strike-title">{{todo.title}}</td>
+            <td>
+                <button onclick="window.location.href='edit-todo-page/{{todo.id}}'" type="button">edit</button>
+            </td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+    
+
+
+
+<label>title</label>
+<input type="text" name="title" value="{{todo.title}}">
+
+<label>description</label>
+<textarea name="description" id="">{{todo.description}}</textarea>
+
+<label>priority</label>
+<select name="priority" id="">
+    <option {% if todo.priority == 1%} selected="selected" {% endif %}>1</option>
+    <option {% if todo.priority == 2 %} selected="selected" {% endif %}>2</option>
+    <option {% if todo.priority == 3 %} selected="selected" {% endif %}>3</option>
+</select>
+ 
+
+<input type="checkbox" name="complete" {% if todo.complete %} checked {% endif %}>
+<label>complete</label>
+
+{% if user%}
+<li>
+    <a href="/todos/todo-page">Home</a>
+</li>
+{% endif %}
+
+{% if user %}
+<li>
+    <a class="btn btn-primary" onclick="logout()" type="button">logout</a>
+</li>
+{% endif %}
